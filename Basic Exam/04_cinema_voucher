@@ -26,4 +26,3 @@ while command != "End":
     command = input()
 print(number_of_tickets)
 print(number_of_other_purchase)
-
