@@ -2,27 +2,25 @@ sum_voucher = int(input())
 
 number_of_tickets = 0
 number_of_other_purchase = 0
-money_left = True
-
 command = input()
-sum_total = 0
-sum_left = sum_voucher
-sum = 0
+price = 0
+
 while command != "End":
     length = len(command)
     if length > 8:
-        number_of_tickets += 1
-        sum = ord(command[0]) + ord(command[1])
-        if sum > sum_left + 1:
+        price = ord(command[0]) + ord(command[1])
+        if price > sum_voucher:
             break
         else:
-            sum_left -= sum
+            sum_voucher -= price
+            number_of_tickets += 1
     else:
-        sum = ord(command[0])
-        if sum > sum_left + 1:
+        price = ord(command[0])
+        if price > sum_voucher:
             break
         number_of_other_purchase += 1
-        sum_left -= ord(command[0])
+        sum_voucher -= ord(command[0])
     command = input()
+    
 print(number_of_tickets)
 print(number_of_other_purchase)
