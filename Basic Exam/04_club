@@ -24,3 +24,4 @@ if command == "Party!":
 if income >= predicted_income:
     print("Target acquired.")
     print(f"Club income - {income:.2f} leva.")
+    
