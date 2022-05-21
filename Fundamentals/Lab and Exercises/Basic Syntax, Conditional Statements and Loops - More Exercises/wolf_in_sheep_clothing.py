@@ -11,7 +11,6 @@
 # The input will be a single string containing the animals separated by a comma and a single space ", "
 
 
-
 sheep = input().split(", ")
 
 sheep.reverse()
