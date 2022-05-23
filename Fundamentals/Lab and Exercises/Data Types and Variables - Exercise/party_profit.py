@@ -7,3 +7,26 @@
 # Every 10th (tenth) day at the start of the day, 2 (two) of your companions leave, 
 # but every 15th (fifteenth) day 5 (five) new companions are joined at the beginning of the day.
 # You should calculate how many coins gets each companion at the end of the adventure.
+
+group_size = int(input())
+days = int(input())
+
+coins = 0
+
+for day in range(1, days + 1):
+    if day % 10 == 0:
+        group_size -= 2
+    if day % 15 == 0:
+        group_size += 5
+    party = False
+    coins += 50
+    coins -= group_size * 2
+    if day % 3 == 0:
+        coins -= group_size * 3
+        party = True
+    if day % 5 == 0:
+        coins += group_size * 20
+        if party:
+            coins -= group_size * 2
+print(f"{group_size} companions received {coins//group_size} coins each.")
+
