@@ -4,3 +4,13 @@
 # •	On the first position is the head;
 # •	On the second position is the body;
 # •	On the last one is the tail.
+
+
+zoo = []
+
+for el in range(3):
+    zoo.append(input())
+    
+zoo[0], zoo[2] = zoo[2], zoo[0]
+
+print(zoo)
