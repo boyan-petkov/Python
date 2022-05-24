@@ -5,3 +5,20 @@
 # Finally, print the following message: 
 # "Count of positives: {count_positives}
 # Sum of negatives: {sum_of_negatives}"
+
+number = int(input())
+
+positives = []
+negatives = []
+
+for _ in range(number):
+    current = int(input())
+    if current >= 0:
+        positives.append(current)
+    else:
+        negatives.append(current)
+
+print(positives)
+print(negatives)
+print(f"Count of positives: {len(positives)}")
+print(f"Sum of negatives: {sum(negatives)}")
