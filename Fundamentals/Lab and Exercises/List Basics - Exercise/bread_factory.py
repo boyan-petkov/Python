@@ -19,3 +19,42 @@
 # "Coins: {coins}"
 # "Energy: {energy}"
 
+string_list = input().split("|")
+
+energy = 100
+coins = 100
+bankrupt = False
+
+for element in string_list:
+    current_task = element.split("-")
+    event = current_task[0]
+    energy_or_coins = int(current_task[1])
+    if event == "rest":
+        if energy + energy_or_coins > 100:
+            print(f"You gained {0} energy.")
+            print(f"Current energy: {energy}.")
+        else:
+            energy += energy_or_coins
+            print(f"You gained {energy_or_coins} energy.")
+            print(f"Current energy: {energy}.")
+    elif event == "order":
+        if energy >= 30:
+            energy -= 30
+            coins += energy_or_coins
+            print(f"You earned {energy_or_coins} coins.")
+        else:
+            energy += 50
+            print(f"You had to rest!")
+    else:
+        if coins > energy_or_coins:
+            coins -= energy_or_coins
+            print(f"You bought {event}.")
+        else:
+            print(f"Closed! Cannot afford {event}.")
+            bankrupt = True
+            break
+if not bankrupt:
+    print("Day completed!")
+    print(f"Coins: {coins}")
+    print(f"Energy: {energy}")
+
