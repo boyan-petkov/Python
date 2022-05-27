@@ -5,3 +5,17 @@
 # The same list with 3 beggars would produce a better outcome for the second beggar: 5, 7 and 3, as they will respectively take [1, 4], [2, 5], and [3].
 # Also, note that not all beggars have to take the same amount of "offers", meaning that the length of the list is not necessarily a multiple of n. 
 # The list length could be even shorter - i.e., the last beggars will take nothing (0).
+
+dollars = [int(el) for el in input().split(",")]
+
+beggars = int(input())
+
+beggars_passed = 0
+sums_list = []
+while beggars_passed < beggars:
+    sum_per_beggar = 0
+    for i in range(beggars_passed, len(dollars), beggars):
+        sum_per_beggar += dollars[i]
+    sums_list.append(sum_per_beggar)
+    beggars_passed += 1
+print(sums_list)
