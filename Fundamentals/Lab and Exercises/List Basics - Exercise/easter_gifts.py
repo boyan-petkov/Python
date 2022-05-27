@@ -11,3 +11,25 @@
 # o	Replace the value of your last gift with this one. 
 # In the end, print the gifts on a single line, except the ones with value "None", separated by a single space in the following format:
 # "{gift1} {gift2} {gift3} … {giftn}"
+
+
+gifts = input().split()
+command = input()
+
+while not command == "No Money":
+    command = command.split()
+    if "OutOfStock" in command:
+        for i in range(len(gifts)):
+            if command[1] in gifts[i]:
+                gifts[i] = "None"
+    elif "Required" in command:
+        for i in range(len(gifts)):
+            if i == int(command[2]):
+                gifts[i] = command[1]
+    elif "JustInCase" in command:
+        gifts[-1] = command[1]
+    command = input()
+while "None" in gifts:
+    gifts.remove("None")
+for i in gifts:
+    print(i, end=" ")
