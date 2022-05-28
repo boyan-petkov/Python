@@ -11,3 +11,17 @@
 # After a specified number of people are skipped, the k person is executed. The procedure is repeated with the remaining people, 
 # starting with the next person, going in the same direction, and skipping the same number of people until no one remains.
 # Print the people by order of executions in the format: "[{executed1},{executed2}, … {executedN}]"
+
+people = input().split()
+
+number = int(input())
+final = []
+position = 0
+while people:
+    position += number - 1
+    while position >= len(people):
+        position -= len(people)
+    temp = people.pop(position)
+    final.append(temp)
+
+print(str(final).replace(' ', '').replace('\'', ''))
