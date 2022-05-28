@@ -7,3 +7,26 @@
 # When you find a char, you should add it to the message and remove it from the string. It means that for the following index, 
 # the text will be with one character less.
 # Print the final message.
+
+numbers = [(x) for x in input().split()]
+
+string = list(input())
+indexes = []
+message = []
+
+for element in numbers:
+    sum = 0
+    for el in element:
+        sum += int(el)
+    indexes.append(sum)
+
+for index in indexes:
+    if index <= len(string):
+        message.append(string[index])
+        string.pop(index)
+    else:
+        index -= len(string)
+        message.append(string[index])
+        string.pop(index)
+print("".join(message))
+
