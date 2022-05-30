@@ -4,3 +4,19 @@
 # •	3.50 – 4.49 - "Good"
 # •	4.50 – 5.49 - "Very Good"
 # •	5.50 – 6.00 - "Excellent"
+
+def grade_result(grade):
+    if grade <= 2.99:
+        return "Fail"
+    elif grade < 3.50:
+        return "Poor"
+    elif grade < 4.50:
+        return "Good"
+    elif grade < 5.50:
+        return "Very Good"
+    else:
+        return "Excellent"
+
+
+current_grade = float(input())
+print(grade_result(current_grade))
