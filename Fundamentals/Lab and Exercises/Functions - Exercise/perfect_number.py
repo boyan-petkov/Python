@@ -4,3 +4,16 @@
 # •	"We have a perfect number!" - if the number is perfect.
 # •	"It's not so perfect." - if the number is NOT perfect.
 # Print the result on the console
+
+def perfect_num(num):
+    divisors = []
+    for current_num in range(1, num):
+        if num % current_num == 0:
+            divisors.append(current_num)
+    if sum(divisors) == num:
+        return "We have a perfect number!"
+    return "It's not so perfect."
+
+
+number = int(input())
+print(perfect_num(number))
