@@ -6,3 +6,29 @@
 # There will be no case in which the people will be more than the count in the wagon.
 # There will be no case in which the index is invalid!
 # After you receive the "End" command print the train.
+
+wagons = int(input())
+
+train = []
+
+for num in range(wagons):
+    train.append(int(0))
+
+command = input()
+while not command == "End":
+    command = command.split()
+    cmd = command[0]
+    if cmd == "add":
+        last = len(train) - 1
+        train[last] += int(command[1])
+    elif cmd == "insert":
+        index = int(command[1])
+        value = int(command[2])
+        train[index] += value
+    elif cmd == "leave":
+        index = int(command[1])
+        value = int(command[2])
+        train[index] -= value
+    command = input()
+
+print(train)
