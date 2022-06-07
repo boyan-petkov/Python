@@ -8,3 +8,16 @@
 # "Score: {happy_count}/{total_count}. Employees are happy!"
 # •	Otherwise:
 # "Score: {happy_count}/{total_count}. Employees are not happy!"
+
+happiness = list(map(int, input().split()))
+factor = int(input())
+
+filtered = [el * factor for el in happiness]
+average = sum(filtered) / len(filtered)
+final = [el for el in filtered if el >= average]
+
+if len(final) >= len(filtered) / 2:
+    print(f"Score: {len(final)}/{len(filtered)}. Employees are happy!")
+else:
+    print(f"Score: {len(final)}/{len(filtered)}. Employees are not happy!")
+
