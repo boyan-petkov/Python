@@ -8,3 +8,20 @@
 # •	If there are not enough chairs in a specific room, print the following message: 
 #   "{needed_chairs_in_room} more chairs needed in room {number_of_room}". The rooms start from 1.
 # •	Otherwise, print: "Game On, {total_free_chairs} free chairs left".
+
+rooms = int(input())
+chairs_enough = True
+free_chair = 0
+for room in range(rooms):
+    chairs, people = input().split()
+    current_room = room + 1
+    if len(chairs) < int(people):
+        print(f"{abs(len(chairs) - int(people))} more chairs needed in room {current_room}")
+        chairs_enough = False
+    else:
+        free_chair += len(chairs) - int(people)
+if chairs_enough:
+    print(f"Game On, {free_chair} free chairs left")
+
+
+
