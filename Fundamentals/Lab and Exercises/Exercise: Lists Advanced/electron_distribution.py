@@ -7,3 +7,21 @@
 # •	You should start filling the shells from the first one at the first position.
 # •	If the electrons are enough to fill the first shell, the left unoccupied electrons should fill the following shell and so on.
 # In the end, print a list with the filled shells.
+
+electrons = int(input())
+start_from = 1
+shells = []
+
+filling = True
+
+while filling:
+    current_electrons = 2 * (start_from ** 2)
+    if electrons - current_electrons >= 0:
+        shells.append(current_electrons)
+        electrons -= current_electrons
+        start_from += 1
+    else:
+        filling = False
+        if electrons > 0:
+            shells.append(electrons)
+print(shells)
