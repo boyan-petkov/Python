@@ -5,3 +5,14 @@
 # o	If there are no bullets left, return: "no bullets left"
 # •	__repr__()
 # o	Returns "Remaining bullets: {amount_of_bullets}"
+
+
+weapon = Weapon(5)
+print(weapon.shoot())
+print(weapon.shoot())
+print(weapon)
+print(weapon.shoot())
+print(weapon.shoot())
+print(weapon.shoot())
+print(weapon.shoot())
+print(weapon)
