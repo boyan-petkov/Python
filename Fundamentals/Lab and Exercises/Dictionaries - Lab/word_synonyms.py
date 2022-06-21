@@ -8,3 +8,20 @@
 # If you get the same word twice, just add the new synonym to the list. 
 # Print the words in the following format:
 # {word} - {synonym1, synonym2 … synonymN}
+
+
+synonyms = dict()
+
+num = int(input())
+
+for words in range(num):
+    word = input()
+    synonym = input()
+
+    if word not in synonyms:
+        synonyms[word] = []
+
+    synonyms[word].append(synonym)
+
+for key, value in synonyms.items():
+    print(f"{key} - {', '.join(value)}")
