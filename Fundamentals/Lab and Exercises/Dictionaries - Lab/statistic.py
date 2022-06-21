@@ -10,3 +10,22 @@
 # - {productN}: {quantityN}
 # Total Products: {count_all_products}
 # Total Quantity: {sum_all_quantities}"
+
+
+inventory = {}
+
+cmd = input()
+
+while not cmd == "statistics":
+    key, value = cmd.split(": ")
+    if key in inventory:
+        inventory[key] += int(value)
+    else:
+        inventory[key] = int(value)
+    cmd = input()
+
+print("Products in stock:")
+for key, value in inventory.items():
+    print(f"- {key}: {value}")
+print(f"Total Products: {len(inventory)}")
+print(f"Total Quantity: {sum(inventory.values())}")
