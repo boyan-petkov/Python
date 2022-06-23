@@ -14,3 +14,28 @@
 # "{username} unregistered successfully"
 # After you execute all of the commands, print all the currently registered users and their license plates in the format: 
 # •	"{username} => {license_plate_number}"
+
+lines = int(input())
+
+parking_lot = dict()
+
+for validation in range(lines):
+    current = input().split()
+    if current[0] == "register":
+        user = current[1]
+        plate_num = current[2]
+        if user not in parking_lot:
+            parking_lot[user] = plate_num
+            print(f"{user} registered {plate_num} successfully")
+        else:
+            print(f"ERROR: already registered with plate number {plate_num}")
+    elif current[0] == "unregister":
+        user = current[1]
+        if user not in parking_lot:
+            print(f"ERROR: user {user} not found")
+        else:
+            print(f"{user} unregistered successfully")
+            parking_lot.pop(user)
+
+for name, plate in parking_lot.items():
+    print(f"{name} => {plate}")
