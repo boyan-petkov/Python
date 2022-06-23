@@ -13,3 +13,40 @@
 # fragments: {number_of_fragments}
 # motes: {number_of_motes}"
 # Finally, print the collected junk items in the order of appearance.
+
+legendary = {"shards": 0, "fragments": 0, "motes": 0}
+result = "Shadowmourne", "Valanyr", "Dragonwrath"
+
+goal = False
+junk = dict()
+
+while not goal:
+    current = input().split()
+    for i in range(0, len(current), 2):
+        quantity = int(current[i])
+        material = current[i + 1].lower()
+        if material == "shards" or material == "fragments" or material == "motes":
+            legendary[material] += quantity
+            if legendary[material] >= 250:
+                legendary[material] -= 250
+                goal = True
+                if material == "shards":
+                    print(f"{result[0]} obtained!")
+                    break
+                elif material == "fragments":
+                    print(f"{result[1]} obtained!")
+                    break
+                elif material == "motes":
+                    print(f"{result[2]} obtained!")
+                    break
+        else:
+            if material not in junk:
+                junk[material] = quantity
+            else:
+                junk[material] += quantity
+    if goal:
+        break
+for key, value in legendary.items():
+    print(f"{key}: {value}")
+for key, value in junk.items():
+    print(f"{key}: {value}")
