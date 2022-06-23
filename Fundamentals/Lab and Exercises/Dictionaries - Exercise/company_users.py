@@ -7,3 +7,22 @@
 # -- {id2}
 # …
 # -- {idN}"
+
+company_data = dict()
+
+
+cmd = input()
+while not cmd == "End":
+    cmd = cmd.split(" -> ")
+    company = cmd[0]
+    id_num = cmd[1]
+    if company not in company_data:
+        company_data[company] = []
+    if id_num not in company_data[company]:
+        company_data[company].append(id_num)
+    cmd = input()
+
+for comp in company_data:
+    print(f"{comp}")
+    for el in company_data[comp]:
+        print(f"-- {el}")
