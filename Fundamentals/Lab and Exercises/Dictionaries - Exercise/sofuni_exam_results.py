@@ -18,3 +18,38 @@
 # Input / Constraints
 # •	The input comes in the form of commands in one of the formats specified above.
 # •	The input ends when you receive the command "Lumpawaroo".
+
+def add_and_sum(language_dict, current_language):
+    if current_language not in language_dict:
+        language_dict[current_language] = 1
+    else:
+        language_dict[current_language] += 1
+
+results = dict()
+languages_used = dict()
+
+cmd = input()
+
+while not cmd == "exam finished":
+    cmd = cmd.split("-")
+    if not cmd[1] == "banned":
+        name, language, points = cmd[0], cmd[1], int(cmd[2])
+        add_and_sum(languages_used, language)
+        if name not in results:
+            results[name] = []
+            results[name].append(language)
+            results[name].append(points)
+        elif name in results:
+            if results[name][1] < points:
+                results[name][1] = points
+    else:
+        name = cmd[0]
+        del results[name]
+    cmd = input()
+
+print("Results:")
+for user, points in results.items():
+    print(f"{user} | {results[user][1]}")
+print("Submissions:")
+for language, number_of_people in languages_used.items():
+    print(f"{language} - {number_of_people}")
