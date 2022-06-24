@@ -19,3 +19,66 @@
 # …
 # #  {contestN} -> {points}"
 
+
+contest_and_password = dict()
+
+all_submissions = dict()
+participants = []
+command = input()
+while not command == "end of contests":
+    valid_contest, password_contest = command.split(":")
+    contest_and_password[valid_contest] = password_contest
+    command = input()
+
+cmd = input()
+while not cmd == "end of submissions":
+    contest, password, username, points = cmd.split("=>")
+    points = int(points)
+    if contest in contest_and_password and contest_and_password[contest] == password:
+        if username not in participants:
+            participants.append(username)
+        if contest not in all_submissions:
+            all_submissions[contest] = []
+            all_submissions[contest].append(username)
+            all_submissions[contest].append(points)
+        elif contest in all_submissions:
+            if username in all_submissions[contest]:
+                current = all_submissions[contest].index(username)
+                previous_points_index = current + 1
+                if all_submissions[contest][previous_points_index] < points:
+                    all_submissions[contest][previous_points_index] = points
+            else:
+                all_submissions[contest].append(username)
+                all_submissions[contest].append(points)
+    cmd = input()
+
+best_candidate = ""
+most_points = 0
+
+for participant in participants:
+    points_participant = 0
+    for language in all_submissions:
+        if participant in all_submissions[language]:
+            i_participant = all_submissions[language].index(participant)
+            i_of_points = i_participant + 1
+            points_participant += all_submissions[language][i_of_points]
+    if points_participant > most_points:
+        most_points = points_participant
+        best_candidate = participant
+
+print(f"Best candidate is {best_candidate} with total {most_points} points.")
+print("Ranking:")
+
+participants = sorted(participants)
+for participant_ in participants:
+    person_contests = dict()
+    for contest_ in all_submissions:
+        if participant_ in all_submissions[contest_]:
+            i_participant = all_submissions[contest_].index(participant_)
+            i_of_points = i_participant + 1
+            points_ = all_submissions[contest_][i_of_points]
+            person_contests[points_] = contest_
+    print(f"{participant_}")
+    person_contests = dict(sorted(person_contests.items(), reverse= True))
+    for key,value in person_contests.items():
+        print(f"#  {value} -> {key}")
