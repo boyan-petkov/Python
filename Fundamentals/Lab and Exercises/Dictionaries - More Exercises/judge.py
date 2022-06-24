@@ -23,3 +23,46 @@
 # "Individual standings:
 # 1.	{username1} -> {total_points}
 # 2.	{username} -> {total_points}
+
+
+all_contests = dict()
+individual_statistic = dict()
+help_me = dict()
+
+command = input()
+while not command == "no more time":
+    username, contest, points = command.split(" -> ")
+    points = int(points)
+    if username not in individual_statistic:
+        individual_statistic[username] = points
+        help_me[username] = {contest: points}
+    elif username in individual_statistic:
+        if contest in help_me[username]:
+            if help_me[username][contest] < points:
+                help_me[username][contest] = points
+                individual_statistic[username] = points
+        else:
+            individual_statistic[username] += points
+    if contest not in all_contests:
+        all_contests[contest] = {username: points}
+    elif contest in all_contests and username not in all_contests[contest]:
+        all_contests[contest][username] = points
+    elif contest in all_contests and username in all_contests[contest]:
+        if all_contests[contest][username] < points:
+            all_contests[contest][username] = points
+    command = input()
+
+for current in all_contests:
+    print(f"{current}: {len(all_contests[current])} participants")
+    sort = dict(sorted(all_contests[current].items(), key=lambda item: (-item[1], item[0])))
+    # сортиране първо по точките след това по име
+    num = 0
+    for name, current_points in sort.items():
+        num += 1
+        print(f"{num}. {name} <::> {current_points}")
+print("Individual standings:")
+num = 0
+sort_names = dict(sorted(individual_statistic.items(), key=lambda item: (-item[1], item[0])))
+for current_user, points in sort_names.items():
+    num += 1
+    print(f"{num}. {current_user} -> {points}")
