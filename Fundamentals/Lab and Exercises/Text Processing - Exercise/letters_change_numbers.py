@@ -23,3 +23,39 @@
 # •	The count of the strings will be in the range [1 … 10]
 # •	The numbers between the letters will be integers in the range [1 … 2 147 483 647]
 # •	Time limit: 0.3 sec. Memory limit: 16 MB
+
+import string
+string_ = input().split()
+result = 0
+
+
+for element in string_:
+    result1 = 0
+    first = ""
+    last = ""
+    num = ""
+    for char in element:
+        if char.isalpha() and len(first) == 0:
+            first += char
+        elif char.isdigit():
+            num += char
+        else:
+            last += char
+    if first.isupper():
+        first = first.lower()
+        a = string.ascii_letters.index(first) + 1
+        num = float(num)
+        result1 = num / a
+    else:
+        a = string.ascii_letters.index(first) + 1
+        num = float(num)
+        result1 = num * a
+    if last.isupper():
+        last = last.lower()
+        a = string.ascii_letters.index(last) + 1
+        result1 -= a
+    else:
+        a = string.ascii_letters.index(last) + 1
+        result1 += a
+    result += result1
+print(f"{result:.2f}")
