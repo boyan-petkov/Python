@@ -14,3 +14,29 @@
 
 # Match NONE of these
 # 01/Jan-1951, 23/sept/1973, 1/Feb/2016
+
+import re
+
+text = input()
+
+expression = r"(?P<day>\d{2})([./-])(?P<month>[A-Z][a-z]+)\2(?P<year>[0-9]{4})\b"
+
+stored = dict()
+
+searched = re.finditer(expression, text) # or re.findall = tuple that can be user for dict
+
+
+for el in searched:
+    day = el.group("day")
+    month = el.group("month")
+    year = el.group("year")
+    print(f"Day: {day}, Month: {month}, Year: {year}")
+# for el in searched:
+#     stored["day"] = el[0]
+#     stored["month"] = el[2]
+#     stored["year"] = el[3]
+#
+
+
+
+
