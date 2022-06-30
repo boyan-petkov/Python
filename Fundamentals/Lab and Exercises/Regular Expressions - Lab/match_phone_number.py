@@ -20,3 +20,17 @@
 # +359 2 222 2222
 # +359-2-222-2222	359-2-222-2222, +359/2/222/2222, +359-2 222 2222
 # +359 2-222-2222, +359-2-222-222, +359-2-222-22222
+
+import re
+
+numbers = input()
+
+expression = r"\+359([ |-])2\1\d{3}\1\d{4}\b"
+
+matches = re.finditer(expression, numbers)
+
+final = list()
+for match in matches:
+    # print(match.group()) #you can also specify the group you want
+    final.append(match.group())
+print(", ".join(final))
