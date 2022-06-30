@@ -7,3 +7,12 @@
 # o	After the first letter, it only contains lowercase letters.
 # o	Each of the two words should be at least two letters long.
 # o	A single space separates the two words.
+
+
+import re
+
+text = input()
+
+final = re.findall(r"\b[A-Z][a-z]+\b [A-Z][a-z]+\b", text)
+
+print(" ".join(final))
