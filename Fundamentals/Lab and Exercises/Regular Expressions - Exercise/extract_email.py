@@ -12,3 +12,13 @@
   
 # Examples of invalid emails: --123@gmail.com, …@mail.bg, .info@info.info, _steve@yahoo.cn, mike@helloworld, mike@.unknown.soft., s.johnson@invalid-
 
+import re
+
+string = input()
+
+expression = r"(?<=\s)(([a-z0-9]+[a-z0-9\.\-_]*)@([a-z0-9])+([\.\-a-z]*)\.[a-z]+)"
+
+matches = re.findall(expression, string)
+
+for email in matches:
+    print(email[0])
