@@ -20,3 +20,20 @@
 # •	"Instruments www.Instruments.rom.com.trombone2000 Instrument here"
 # •	"All your ice cream flavors-www.scream.for.ice.cream(We  also have squirrels)"
 
+import re
+
+text = input()
+
+expression = r"([w]{3}\.)([A-Za-z0-9]+\-*)+(\.[a-z]+)+"
+
+all_emails = list()
+while True:
+    if text:
+        matches = re.search(expression, text)
+        if matches:
+            all_emails.append(matches.group(0))
+    else:
+        break
+    text = input()
+for email in all_emails:
+    print(email)
