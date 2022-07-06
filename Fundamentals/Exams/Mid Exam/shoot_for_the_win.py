@@ -13,3 +13,26 @@
 # Output
 # •	The format of the output is described above in the problem description.
 
+targets = [int(x) for x in input().split()]
+count = 0
+command = input()
+
+while not command == "End":
+    index = int(command)
+    if index < len(targets):
+        if targets[index] == -1:
+            continue
+        else:
+            current = targets[index]
+            targets[index] = -1
+            count += 1
+        for i in range(len(targets)):
+            if targets[i] > current:
+                targets[i] -= current
+            elif targets[i] <= current and not targets[i] == -1:
+                targets[i] += current
+    command = input()
+
+targets = [str(el) for el in targets]
+if command == "End":
+    print(f"Shot targets: {count} -> {' '.join(targets)}")
