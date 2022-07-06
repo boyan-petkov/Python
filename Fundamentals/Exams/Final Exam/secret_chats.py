@@ -17,3 +17,35 @@
 # •	After each set of instructions, print the resulting string. 
 # •	After the "Reveal" command is received, print this message:
 # "You have a new text message: {message}"
+
+some_string = input()
+
+helper = ""
+
+cmd = input()
+
+while not cmd == "Reveal":
+    ok = True
+    cmd = cmd.split(":|:")
+    command = cmd[0]
+    if command == "InsertSpace":
+        i = int(cmd[1])
+        some_string = some_string[:i] + " " + some_string[i:]
+    elif command == "Reverse":
+        sub = cmd[1]
+        if sub in some_string:
+            some_string = some_string.replace(sub, "", 1)
+            sub = sub[::-1]
+            some_string += sub
+        else:
+            ok = False
+            print("error")
+    elif command == "ChangeAll":
+        old = cmd[1]
+        new = cmd[2]
+        some_string = some_string.replace(old, new)
+    if ok:
+        print(some_string)
+    cmd = input()
+
+print(f"You have a new text message: {some_string}")
