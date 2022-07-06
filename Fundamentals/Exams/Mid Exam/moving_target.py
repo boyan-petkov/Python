@@ -19,3 +19,31 @@
 # Output
 # •	Print the appropriate message in case of any command if necessary.
 # •	In the end, print the sequence of targets in the format described above.
+
+targets = list(map(lambda el: int(el), input().split()))
+
+command = input()
+
+while not command == "End":
+    current = command.split()
+    cmd, index, value = current[0], int(current[1]), int(current[2])
+    if cmd == "Shoot":
+        if 0 <= index < len(targets):
+            targets[index] -= value
+            if targets[index] <= 0:
+                targets.pop(index)
+    elif cmd == "Add":
+        if 0 <= index <len(targets):
+            targets.insert(index, value)
+        else:
+            print("Invalid placement!")
+    elif cmd == "Strike":
+        start = index - value
+        end = index + value
+        if start >= 0 and end < len(targets):
+            del targets[start: end + 1]
+        else:
+            print(f"Strike missed!")
+    command = input()
+targets = list(map(lambda el: str(el), targets))
+print("|".join(targets))
