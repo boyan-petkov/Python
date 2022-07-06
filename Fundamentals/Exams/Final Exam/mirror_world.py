@@ -21,3 +21,36 @@
 # •	Print the proper output messages in the proper cases as described in the problem description.
 # •	If there are pairs of mirror words, print them in the end, each pair separated by ", ".
 # •	Each pair of mirror word must be printed with " <=> " between the words.
+
+import re
+
+some_string = input()
+
+expression = r"(@|#)([A-Za-z]{3,})\1{2}([a-zA-Z]{3,})\1"
+
+searched = re.finditer(expression, some_string)
+
+pairs = list()
+
+pairs2 = dict()
+
+for el in searched:
+    pairs2[el[2]] = el[3]
+
+if not pairs2:
+    print("No word pairs found!")
+else:
+    print(f"{len(pairs2)} word pairs found!")
+final = dict()
+for key, value in pairs2.items():
+    if key == value[::-1]:
+        final[key] = value
+if not final:
+    print(f"No mirror words!")
+else:
+    print("The mirror words are:")
+    for word1, word2 in final.items():
+        # print(f"{word1} <=> {word2}", end=", ")
+        current = f"{word1} <=> {word2}"
+        pairs.append(current)
+print(", ".join(pairs))
