@@ -26,3 +26,57 @@
 # •	The car names in the commands will always be valid cars in your possession.
 # Output
 # •	All the output messages with the appropriate formats are described in the problem description.
+
+def add_cars(some_car):
+    car, km, fuel = some_car.split("|")
+    all_cars[car] = []
+    all_cars[car].append(int(km))
+    all_cars[car].append(int(fuel))
+
+
+cars = int(input())
+
+all_cars = dict()
+
+for x in range(cars):
+    current_car = input()
+    add_cars(current_car)
+
+
+cmd = input()
+while not cmd == "Stop":
+    cmd = cmd.split(" : ")
+    command = cmd[0]
+    if command == "Drive":
+        car, distance, fuel = cmd[1], int(cmd[2]), int(cmd[3])
+        if all_cars[car][1] >= fuel:
+            all_cars[car][1] -= fuel
+            all_cars[car][0] += distance
+            print(f"{car} driven for {distance} kilometers. {fuel} liters of fuel consumed.")
+            if all_cars[car][0] >= 100000:
+                del all_cars[car]
+                print(f"Time to sell the {car}!")
+        else:
+            print("Not enough fuel to make that ride")
+    elif command == "Refuel":
+        car, fuel = cmd[1], int(cmd[2])
+        max_fuel = 75
+        if all_cars[car][1] + fuel <= max_fuel:
+            all_cars[car][1] += fuel
+        else:
+            fuel = max_fuel - all_cars[car][1]
+            all_cars[car][1] = max_fuel
+        print(f"{car} refueled with {fuel} liters")
+    elif command == "Revert":
+        car, kilometers = cmd[1], int(cmd[2])
+        if all_cars[car][0] - kilometers < 10000:
+            all_cars[car][0] = 10000
+        else:
+            all_cars[car][0] -= kilometers
+            print(f"{car} mileage decreased by {kilometers} kilometers")
+    cmd = input()
+
+for car, value in all_cars.items():
+    mileage = value[0]
+    fuel = value[1]
+    print(f"{car} -> Mileage: {mileage} kms, Fuel in the tank: {fuel} lt.")
