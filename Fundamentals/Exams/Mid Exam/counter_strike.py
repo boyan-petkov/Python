@@ -12,3 +12,24 @@
 # •	On the following lines, you will be receiving the distance of an enemy – an integer [1-10000]
 # Output
 # •	The description contains the proper output messages for each case and the format they should be printed.
+
+initial_energy = int(input())
+
+count = 0
+energy = initial_energy
+end = False
+command = input()
+while not command == "End of battle" and energy >= 0:
+    command = int(command)
+    if (energy - command) >= 0:
+        energy -= command
+        count +=1
+    else:
+        print(f"Not enough energy! Game ends with {count} won battles and {energy} energy")
+        break
+    if count % 3 == 0:
+        energy += count
+    command = input()
+if command == "End of battle":
+    print(f"Won battles: {count}. Energy left: {energy}")
+
