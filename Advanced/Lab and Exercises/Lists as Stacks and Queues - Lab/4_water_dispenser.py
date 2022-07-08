@@ -7,3 +7,31 @@
 # o	Otherwise, print "{person_name} must wait" and remove the person from the queue without reducing the water in the dispenser.
 # -	"refill {liters}" - add the given litters in the dispenser.
 # At the end print how many litters of water have left in the format: "{left_liters} liters left".
+
+from collections import deque
+
+liters_in_dispenser = int(input())
+
+command = input()
+people = deque()
+
+while not command == "Start":
+    people.append(command)
+    command = input()
+
+cmd = input()
+while not cmd == "End":
+    if cmd.startswith("refill"):
+        liters_to_fill = cmd.split()[1]
+        liters_in_dispenser += int(liters_to_fill)
+    else:
+        name = people.popleft()
+        liters = int(cmd)
+        if liters <= liters_in_dispenser:
+            print(f"{name} got water")
+            liters_in_dispenser -= liters
+        else:
+            print(f"{name} must wait")
+    cmd = input()
+
+print(f"{liters_in_dispenser} liters left")
