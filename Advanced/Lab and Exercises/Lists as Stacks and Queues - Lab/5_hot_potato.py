@@ -4,3 +4,14 @@
 # Create a program that simulates the game of Hot Potato. On the first line you will receive names of kids, separated by a single space. 
 # On the second line you will receive the nth toss (integer) in which a child leaves the game.
 # Print every kid which is removed from the circle in the format "Removed {kid}". In the end, print the only kid left in the format "Last is {kid}".
+
+from collections import deque
+
+children = deque(input().split())
+turn = int(input())
+
+while not len(children) == 1:
+    for _ in range(turn - 1):
+        children.append(children.popleft())
+    print(f"Removed {children.popleft()}")
+print(f"Last is {children.popleft()}")
