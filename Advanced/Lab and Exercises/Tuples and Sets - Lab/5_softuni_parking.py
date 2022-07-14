@@ -4,7 +4,7 @@
 # All reservation codes are 8 characters long, and all VIP numbers will start with a digit. Keep in mind that all reservation numbers must be unique.
 # After that, you will be receiving guests who came to the party until you read the "END" command.
 # In the end, print the number of guests who did not come to the party and their reservation numbers:
-# •	The VIP guests must be first.
+# •	The VIP guests must be first. 
 # •	Both the VIP and the Regular guests must be sorted in ascending order
 
 def vip_or_not(current_code):
