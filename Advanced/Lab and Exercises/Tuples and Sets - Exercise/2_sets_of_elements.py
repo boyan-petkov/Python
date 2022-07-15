@@ -6,3 +6,25 @@
 # Set with length n = 4: {1, 3, 5, 7}
 # Set with length m = 3: {3, 4, 5}
 # Set that contains all the elements that repeat in both sets -> {3, 5}
+
+def add_them_in_collection(some_set, value):
+    some_set.add(value)
+    return some_set
+
+
+len_first, len_second = [int(x) for x in input().split()]
+first = set()
+second = set()
+
+for _ in range(len_first):
+    add_them_in_collection(first, input())
+
+for _ in range(len_second):
+    add_them_in_collection(second, input())
+
+
+final = first.intersection(second)
+print("\n".join(final))
+
+
+
