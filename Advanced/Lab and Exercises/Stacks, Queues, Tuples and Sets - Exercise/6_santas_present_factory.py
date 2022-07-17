@@ -37,3 +37,58 @@
 # •	All the materials' values will be integers in the range [1, 100]
 # •	Magic level values will be integers in the range [-10, 100]
 # •	In all cases, at least one present will be crafted
+
+from collections import deque
+
+main_colors = ["red", "yellow", "blue"]
+secondary_colors = ["orange", "purple", "green"]
+
+colors = deque(input().split())
+ready = []
+
+while colors:
+    first = colors.popleft()
+    if colors:
+        second = colors.pop()
+    else:
+        second = ""
+
+    current = first + second
+    if current in main_colors or current in secondary_colors:
+        ready.append(current)
+        continue
+    current = second + first
+    if current in main_colors or current in secondary_colors:
+        ready.append(current)
+        continue
+
+    subst1 = first[:-1]
+    subst2 = second[:-1]
+
+    if subst1:
+        colors.insert(len(colors) // 2, subst1)
+    if subst2:
+        colors.insert(len(colors) // 2, subst2)
+
+result = []
+
+requirements = {
+    "orange": ["red", "yellow"],
+    "purple": ['red', "blue"],
+    "green": ["yellow", "blue"]
+}
+
+for color in ready:
+    if color in main_colors:
+        result.append(color)
+    else:
+        good = True
+        for required in requirements[color]:
+            if required not in ready:
+                good = False
+                break
+        if good:
+            result.append(color)
+print(result)
+
+
