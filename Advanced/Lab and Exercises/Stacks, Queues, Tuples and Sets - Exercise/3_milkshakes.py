@@ -23,3 +23,49 @@
   
 # Constraints
 # •	All given numbers will be valid integers in the range [-100 … 100].
+
+from collections import deque
+
+
+def print_leftovers(collection, degredient):
+    if len(collection) > 0:
+        print(f"{degredient}: " + ', '.join([str(x) for x in collection]))
+    else:
+        print(f"{degredient}: empty")
+
+
+chocolates = deque([int(x) for x in input().split(", ")])
+cups = deque([int(x) for x in input().split(", ")])
+
+milkshakes = 0
+completed = False
+
+while chocolates and cups and milkshakes < 5:
+    chocolate, milk = chocolates.pop(), cups.popleft()
+    if chocolate <= 0 and milk <= 0:
+        continue
+    
+    if chocolate <= 0:
+        cups.appendleft(milk)
+        continue
+        
+    if milk <= 0:
+        chocolates.append(chocolate)
+        continue
+        
+    if chocolate == milk:
+        milkshakes += 1
+
+    else:
+        cups.append(milk)
+        choc = chocolate - 5
+        chocolates.append(choc)
+    if milkshakes == 5:
+        completed = True
+        break
+if completed:
+    print("Great! You made all the chocolate milkshakes needed!")
+else:
+    print("Not enough milkshakes.")
+print_leftovers(chocolates, "Chocolate")
+print_leftovers(cups, "Milk")
