@@ -35,3 +35,40 @@
 # •	All the bee's values will be integers in the range [0, 150]
 # •	Nectar's values will be integers in the range [0, 150]
 # •	There always will be enough symbols in the sequence of symbols
+
+
+
+from collections import deque
+
+bees = deque([int(x) for x in input().split()])
+nectar = deque([int(x) for x in input().split()])
+operators = deque([x for x in input().split()])
+honey_made = 0
+
+while bees and nectar:
+    # bee, current_nec = bees.popleft(), nectar.pop()
+    bee = bees[0]
+    current_nec = nectar.pop()
+
+    if current_nec < bee:
+        continue
+
+    bees.popleft()
+    result = 0
+    operation = operators.popleft()
+    if operation == "+":
+        result = abs(bee + current_nec)
+    elif operation == "-":
+        result = abs(bee - current_nec)
+    elif operation == "*":
+        result = abs(bee * current_nec)
+    elif operation == "/" and current_nec > 0:
+        result = abs(bee / current_nec)
+    honey_made += result
+
+print(f"Total honey made: {honey_made}")
+if bees:
+    print(f"Bees left:", ', '.join([str(x) for x in bees]))
+if nectar:
+    print(f"Nectar left:", ', '.join([str(x) for x in nectar]))
+
