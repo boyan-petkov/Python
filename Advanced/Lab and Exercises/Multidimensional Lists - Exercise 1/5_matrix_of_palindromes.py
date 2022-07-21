@@ -6,3 +6,19 @@
 # Input
 # •	The numbers r and c stay at the first line at the input in the format "{rows} {columns}"
 # •	r and c are integers in the range [1, 26]
+
+rows, columns = [int(el) for el in input().split()]
+
+matrix = []
+
+# alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+#             "v", "w", "x", "y", "z"]
+
+for row_i in range(rows):
+    for col_i in range(columns):
+        # current = [alphabet[row_i], alphabet[row_i + col_i], alphabet[row_i]]
+        # print(*current, sep="", end=" ")
+        print(f"{chr(97+ row_i)}{chr(97 + row_i+ col_i)}{chr(97 + row_i)}", end=" ")
+    print()
+
+
