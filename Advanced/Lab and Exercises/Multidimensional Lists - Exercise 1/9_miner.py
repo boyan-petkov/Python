@@ -27,3 +27,53 @@
 # Constraints
 # •	The field size will be a 32-bit integer in the range [0 … 2 147 483 647]
 # •	The field will always have only one "s"
+
+def valid(current_position):
+
+    pass
+
+rows = int(input())
+
+matrix = []
+
+directions = input().split()
+
+cur_row = 0
+cur_col = 0
+coals = 0
+
+for row in range(rows):
+    current_row = input().split()
+    matrix.append(current_row)
+    for i in range(len(current_row)):
+        if current_row[i] == "s":
+            cur_row = row
+            cur_col = i
+        elif current_row[i] == "c":
+            coals += 1
+end = False
+for cmd in directions:
+    if cmd == "up" and 0 <= cur_row - 1 < rows and 0 <= cur_col < rows:
+        cur_row -= 1
+    elif cmd == "down" and 0 <= cur_row + 1 < rows and 0 <= cur_col < rows:
+        cur_row += 1
+    elif cmd == "left" and 0 <= cur_row < rows and 0 <= cur_col - 1 < rows:
+        cur_col -= 1
+    elif cmd == "right" and 0 <= cur_row < rows and 0 <= cur_col + 1 < rows:
+        cur_col += 1
+
+    if matrix[cur_row][cur_col] == "c":
+        coals -= 1
+        matrix[cur_row][cur_col] = "*"
+        if coals == 0:
+            break
+    elif matrix[cur_row][cur_col] == "e":
+        end = True
+        break
+
+if coals == 0:
+    print(f"You collected all coal! ({cur_row}, {cur_col})")
+elif end:
+    print(f"Game over! ({cur_row}, {cur_col})")
+else:
+    print(f"{coals} pieces of coal left. ({cur_row}, {cur_col})")
