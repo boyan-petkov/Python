@@ -22,3 +22,69 @@
 # •	The bomb coordinates will always be in the matrix.
 # •	The bomb's values will always be greater than 0.
 # •	The integers of the matrix will be in the range [1…10000]. 
+
+def valid(row, col, size):
+    if 0 <= row < size and 0 <= col < size:
+        return True
+
+
+def neighbours(row, col, matrix):
+    if valid(row - 1, col, len(matrix)) and matrix[row - 1][col] > 0:
+        matrix[row - 1][col] -= bomb_power
+    if valid(row + 1, col, len(matrix)) and matrix[row + 1][col] > 0:
+        matrix[row + 1][col] -= bomb_power
+    if valid(row, col - 1, len(matrix)) and matrix[row][col - 1] > 0:
+        matrix[row][col - 1] -= bomb_power
+    if valid(row, col + 1, len(matrix)) and matrix[row][col + 1] > 0:
+        matrix[row][col + 1] -= bomb_power
+    if valid(row - 1, col - 1, len(matrix)) and matrix[row - 1][col - 1] > 0:
+        matrix[row - 1][col - 1] -= bomb_power
+    if valid(row - 1, col + 1, len(matrix)) and matrix[row - 1][col + 1] > 0:
+        matrix[row - 1][col + 1] -= bomb_power
+    if valid(row + 1, col - 1, len(matrix)) and matrix[row + 1][col - 1] > 0:
+        matrix[row + 1][col - 1] -= bomb_power
+    if valid(row + 1, col + 1, len(matrix)) and matrix[row + 1][col + 1] > 0:
+        matrix[row + 1][col + 1] -= bomb_power
+    return matrix
+
+
+def print_alive_and_sum():
+    cells = 0
+    total = 0
+    for row in matrix:
+        for el in row:
+            if el > 0:
+                cells += 1
+                total += el
+    print(f"Alive cells: {cells}")
+    print(f"Sum: {total}")
+
+
+def print_matrix(cur_matrix):
+    for row in cur_matrix:
+        print(*row, sep=" ")
+    print()
+
+
+rows = int(input())
+
+matrix = []
+
+for _ in range(rows):
+    matrix.append([int(el) for el in input().split()])
+
+bombs = input().split()
+
+for _ in range(0, 20000):
+    a = 5
+    a+= 1
+for el in bombs:
+    b_row, b_col = [int(el) for el in el.split(",")]
+    if matrix[b_row][b_col] <= 0:
+        continue
+    bomb_power = matrix[b_row][b_col]
+    matrix[b_row][b_col] = 0
+    neighbours(b_row, b_col, matrix)
+
+print_alive_and_sum()
+print_matrix(matrix)
