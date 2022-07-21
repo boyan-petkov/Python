@@ -16,3 +16,22 @@
 # Constraints
 # •	The dimensions N and M of the matrix will be integers in the range [1 … 12]
 # •	The snake will be a string with length in the range [1 … 20] and will not contain any whitespace characters
+
+rows, columns = [int(el) for el in input().split()]
+
+snake = input()
+
+matrix = []
+idx = 0
+
+for row_i in range(rows):
+    current = []
+    for col_i in range(columns):
+        current.append(snake[idx % len(snake)])
+        idx += 1
+    if row_i % 2 == 0:
+        print(*current, sep="")
+    else:
+        current = reversed(current)
+        print(*current, sep="")
+
