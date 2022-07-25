@@ -30,3 +30,99 @@
 # Constrains
 # •	All the commands will be valid
 # •	There will always be at least one target
+
+def moving(row, col, steps, direction):
+    if direction == "up":
+        if 0 <= row - steps and matrix[row - steps][col] != "x":
+            return row - steps, col
+    elif direction == "down":
+        if row + steps < size and matrix[row + steps][col] != "x":
+            return row + steps, col
+    elif direction == "left":
+        if col - steps >= 0 and matrix[row][col - steps] != "x":
+            return row, col - steps
+    elif direction == "right":
+        if col + steps < size and matrix[row][col + steps] != "x":
+            return row, col + steps
+    return False
+
+
+def shooting(row, col, direction):
+    global targets
+    while True:
+        if direction == "up":
+            row -= 1
+            if row < 0:
+                break
+            elif matrix[row][col] == "x":
+                targets -= 1
+                return row, col
+        elif direction == "down":
+            row += 1
+            if row >= size:
+                break
+            elif matrix[row][col] == "x":
+                targets -= 1
+                return row, col
+        elif direction == "left":
+            col -= 1
+            if col < 0:
+                break
+            elif matrix[row][col] == "x":
+                targets -= 1
+                return row, col
+        elif direction == "right":
+            col += 1
+            if col >= size:
+                break
+            elif matrix[row][col] == "x":
+                targets -= 1
+                return row, col
+
+
+size = 5
+
+matrix = []
+player_row = 0
+player_col = 0
+
+targets = 0
+hit_targets = []
+for row_i in range(size):
+    territory = input().split()
+    matrix.append(territory)
+    for col_i in range(size):
+        if territory[col_i] == "A":
+            player_row = row_i
+            player_col = col_i
+        elif territory[col_i] == "x":
+            targets += 1
+
+cmd_n = int(input())
+
+for _ in range(cmd_n):
+    raw_command = input().split()
+    command = raw_command[0]
+    if command == "move":
+        direction, step = raw_command[1], int(raw_command[2])
+        current = moving(player_row, player_col, step, direction)
+        if current:
+            player_row, player_col = current
+
+    elif command == "shoot":
+        direction_shooting = raw_command[1]
+        current = shooting(player_row, player_col, direction_shooting)
+        if current:
+            target_row, target_col = current[0], current[1]
+            hit_targets.append([target_row, target_col])
+            matrix[target_row][target_col] = "."
+    if targets == 0:
+        break
+
+if targets == 0:
+    print(f"Training completed! All {len(hit_targets)} targets hit.")
+else:
+    print(f"Training not completed! {targets} targets left.")
+if hit_targets:
+    for tar in hit_targets:
+        print(tar)
