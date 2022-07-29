@@ -9,3 +9,12 @@
 # 	"The positives are stronger than the negatives"
 # Note: you will not receive any zeroes in the input.
 
+nums = [int(x) for x in input().split()]
+positive, negative = [x for x in nums if x > 0], [x for x in nums if x < 0]
+
+print(sum(negative))
+print(sum(positive))
+if sum(positive) > abs(sum(negative)):
+    print("The positives are stronger than the negatives")
+else:
+    print("The negatives are stronger than the positives")
