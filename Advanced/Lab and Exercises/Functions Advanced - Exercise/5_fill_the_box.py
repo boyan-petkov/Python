@@ -15,3 +15,22 @@
 # If there is no free space in the box, print:
 # "No more free space! You have {cubes left} more cubes."
 
+
+def fill_the_box(*args):
+    height, length, width = args[0], args[1], args[2]
+    capacity = height * length * width
+    for idx in range(3, len(args)):
+        current = args[idx]
+        if current == "Finish":
+            break
+        capacity -= current
+
+    if capacity > 0:
+        return f"There is free space in the box. You could put {capacity} more cubes."
+    return f"No more free space! You have {abs(capacity)} more cubes."
+
+
+
+print(fill_the_box(2, 8, 2, 2, 1, 7, 3, 1, 5, "Finish"))
+print(fill_the_box(5, 5, 2, 40, 11, 7, 3, 1, 5, "Finish"))
+print(fill_the_box(10, 10, 10, 40, "Finish", 2, 15, 30))
