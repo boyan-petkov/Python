@@ -30,3 +30,43 @@
 # Constrains
 # •	Each tuple given will always contain the type of meal in the first position and a product in the second.
 # •	There will be no other meals passed than "Soup", "Pizza", and "Dessert".
+
+def shopping_cart(*args):
+    pizza_limit = 4
+    soup_limit = 3
+    dessert_limit = 2
+    all_meals_dict = {"Pizza": [], "Dessert": [], "Soup": []}
+    for element in args:
+        if element == "Stop":
+            break
+        meal, product = element[0], element[1]
+        if product in all_meals_dict[meal]:
+            continue
+        if meal == "Pizza" and len(all_meals_dict[meal]) == pizza_limit:
+            continue
+        if meal == "Soup" and len(all_meals_dict[meal]) == soup_limit:
+            continue
+        if meal == "Dessert" and len(all_meals_dict[meal]) == dessert_limit:
+            continue
+
+        all_meals_dict[meal].append(product)
+
+    for meal, products in all_meals_dict.items():
+        products = sorted(products)
+        all_meals_dict[meal] = products
+
+    sorted_meals = sorted(all_meals_dict.items(), key=lambda x: (-len(x[1]), x[0]))
+    result = ""
+    if len(all_meals_dict["Pizza"]) == 0 and len(all_meals_dict["Soup"]) == 0 and len(all_meals_dict["Dessert"]) == 0:
+        return "No products in the cart!"
+    for tuple in sorted_meals:
+        name = tuple[0]
+        products = tuple[1]
+        result += f"{name}:\n"
+        if not products:
+            continue
+        for product in products:
+            result += f" - {product}\n"
+    return result
+
+
