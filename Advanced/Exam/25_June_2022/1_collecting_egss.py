@@ -28,7 +28,7 @@
 # Constraints
 # •	You will always have at least one egg and at least one piece of paper.
 
-
+from collections import deque
 
 all_eggs = deque([int(el) for el in input().split(", ")])
 all_papers = deque([int(el) for el in input().split(", ")])
