@@ -27,3 +27,41 @@
 # o	Pieces of paper left: {left pieces of paper joined by ", "}
 # Constraints
 # •	You will always have at least one egg and at least one piece of paper.
+
+
+
+all_eggs = deque([int(el) for el in input().split(", ")])
+all_papers = deque([int(el) for el in input().split(", ")])
+
+boxes = 0
+box_size = 50
+
+while True:
+    if not all_eggs or not all_papers:
+        break
+
+    egg, paper = all_eggs.popleft(), all_papers.pop()
+    if egg <= 0:
+        all_papers.append(paper)
+        continue
+
+    if egg == 13:
+        first_paper = all_papers.popleft()
+        all_papers.append(first_paper)
+        all_papers.appendleft(paper)
+        continue
+
+    wrapped_egg = egg + paper
+    if wrapped_egg <= box_size:
+        boxes += 1
+    continue
+
+if boxes:
+    print(f"Great! You filled {boxes} boxes.")
+else:
+    print(f"Sorry! You couldn't fill any boxes!")
+
+if all_eggs:
+    print(f"Eggs left: {', '.join([str(el) for el in all_eggs])}")
+if all_papers:
+    print(f"Pieces of paper left: {', '.join([str(el) for el in all_papers])}")
