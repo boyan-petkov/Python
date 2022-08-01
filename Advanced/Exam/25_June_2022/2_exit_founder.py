@@ -23,17 +23,19 @@
 # •	On the following 6 lines, you will receive the maze board (elements will be separated by a space)
 # •	On the following lines, you will be receiving coordinates in the format: "({row}, {column})"
 # Output
-# •	You should print the output as described above.
-# •	The input coordinates will always be valid.
+# •	You should print the output as described above.# •	The input coordinates will always be valid.
 matrix = []
 size = 6
 player_turn = 0
+
 players = input().split(", ")
 
 for _ in range(size):
     matrix.append([(el) for el in input().split()])
+    
 player1_rest = False
 player2_rest = False
+
 while True:
     player_turn += 1
     player_turn = 2 if player_turn % 2 == 0 else 1
