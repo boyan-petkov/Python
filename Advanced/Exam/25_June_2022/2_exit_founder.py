@@ -25,3 +25,45 @@
 # Output
 # •	You should print the output as described above.
 # •	The input coordinates will always be valid.
+matrix = []
+size = 6
+player_turn = 0
+players = input().split(", ")
+
+for _ in range(size):
+    matrix.append([(el) for el in input().split()])
+player1_rest = False
+player2_rest = False
+while True:
+    player_turn += 1
+    player_turn = 2 if player_turn % 2 == 0 else 1
+    name = players[player_turn - 1]
+    position = input().replace("(", "").replace(")", "").split(", ")
+
+    if player_turn == 2 and player2_rest:
+        player2_rest = False
+        continue
+    if player_turn == 1 and player1_rest:
+        player1_rest = False
+        continue
+
+    row, column = int(position[0]), int(position[1])
+
+    if matrix[row][column] == "E":
+        print(f"{name} found the Exit and wins the game!")
+        break
+
+    if matrix[row][column] == "T":
+        players.remove(name)
+        print(f"{name} is out of the game! The winner is {''.join(players)}.")
+        break
+
+    if matrix[row][column] == "W":
+        print(f"{name} hits a wall and needs to rest.")
+        if player_turn % 2 == 0:
+            player2_rest = True
+            continue
+        player1_rest = True
+
+
+
