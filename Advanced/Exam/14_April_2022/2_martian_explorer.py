@@ -38,6 +38,8 @@ def matrix_(m_size):
                 rover_c = i_c
         matrix.append(line)
     return rover_r, rover_c
+
+
 def outside(matri, r, c):
     if r < 0:
         r = 5
@@ -48,6 +50,8 @@ def outside(matri, r, c):
     elif c == len(matri):
         c = 0
     return r, c
+
+
 def direction(cmd, row, col, matr):
     if cmd == "up":
         row, col = outside(matr, row - 1, col)
@@ -103,7 +107,4 @@ if len(set(deposit_founded)) == 3:
     print(f"Area suitable to start the colony.")
 else:
     print(f"Area not suitable to start the colony.")
-
-
-
 
