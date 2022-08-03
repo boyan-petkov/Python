@@ -15,3 +15,20 @@
 # •	There will be no case with capital letters.
 # •	There will be no case with a string consisting of other than letters.
 
+def words_sorting(*args):
+    result = ""
+    total = 0
+    for word in args:
+        value = 0
+        for char in word:
+            value += ord(char)
+        final_dict[word] = value
+        total += value
+    if total % 2 == 0:
+        sorted_dic = sorted(final_dict.items(), key=lambda x: x[0])
+    else:
+        sorted_dic = sorted(final_dict.items(), key=lambda x: (-x[1]))
+    for kvp in sorted_dic:
+        result += f"{kvp[0]} - {kvp[1]}\n"
+    return result
+final_dict = {}
