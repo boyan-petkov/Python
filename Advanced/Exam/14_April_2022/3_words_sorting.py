@@ -24,6 +24,8 @@ def words_sorting(*args):
             value += ord(char)
         final_dict[word] = value
         total += value
+
+
     if total % 2 == 0:
         sorted_dic = sorted(final_dict.items(), key=lambda x: x[0])
     else:
@@ -31,4 +33,7 @@ def words_sorting(*args):
     for kvp in sorted_dic:
         result += f"{kvp[0]} - {kvp[1]}\n"
     return result
+
+
+
 final_dict = {}
