@@ -25,6 +25,85 @@
 # After you go through all the commands or the rover gets broken, print out on the console:
 # •	If the rover has found at least one of each deposit, print on the console: "Area suitable to start the colony."
 # •	Otherwise, print on the console: "Area not suitable to start the colony."
-# See examples for more clarification.
+
+from collections import deque
+
+def matrix_(m_size):
+    for i_r in range(m_size):
+        line = input().split()
+        for i_c in range(m_size):
+            current = line[i_c]
+            if current == "E":
+                rover_r = i_r
+                rover_c = i_c
+        matrix.append(line)
+    return rover_r, rover_c
+def outside(matri, r, c):
+    if r < 0:
+        r = 5
+    elif r == len(matri):
+        r = 0
+    elif c < 0:
+        c = 5
+    elif c == len(matri):
+        c = 0
+    return r, c
+def direction(cmd, row, col, matr):
+    if cmd == "up":
+        row, col = outside(matr, row - 1, col)
+    elif cmd == "down":
+        row, col = outside(matr, row + 1, col)
+    elif cmd == "right":
+        row, col = outside(matr, row, col + 1)
+    elif cmd == "left":
+        row, col = outside(matr, row, col - 1)
+    return row, col
+
+
+def check_current_position_or_crash(matrix, row, col):
+    crashed, deposit_found = False, False
+    deposits = ("Water", "Metal", "Concrete")
+    if matrix[row][col] == "R":
+        crashed = True
+    elif matrix[row][col] == "W":
+        deposits = deposits[0]
+        deposit_found = True
+    elif matrix[row][col] == "M":
+        deposits = deposits[1]
+        deposit_found = True
+    elif matrix[row][col] == "C":
+        deposits = deposits[2]
+        deposit_found = True
+
+    if deposit_found:
+        print(f"{deposits} deposit found at ({row}, {col})")
+        deposit_founded.append(deposits)
+    if crashed:
+        print(f"Rover got broken at ({row}, {col})")
+        return True
+
+
+size = 6
+
+matrix = []
+deposit_founded = []
+rover_r, rover_c = matrix_(size)
+direction_commands = deque(input().split(", "))
+
+while True:
+    if not direction_commands:
+        break
+
+    curr_direction = direction_commands.popleft()
+    rover_r, rover_c = direction(curr_direction, rover_r, rover_c, matrix)
+    if check_current_position_or_crash(matrix, rover_r, rover_c):
+        break
+
+if len(set(deposit_founded)) == 3:
+    print(f"Area suitable to start the colony.")
+else:
+    print(f"Area not suitable to start the colony.")
+
+
 
 
