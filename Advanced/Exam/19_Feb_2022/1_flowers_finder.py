@@ -33,3 +33,41 @@
 # •	All letters will be lowercase.
 # •	The letter 'y' will always be a vowel.
 # •	The letter 'w' will always be a consonant.
+
+from collections import deque
+
+searched = ["rose", "tulip", "lotus", "daffodil"]
+
+vowels = deque(input().split())
+consonants = deque(input().split())
+a = 5
+
+found = ["", "", "", ""]
+still_searching = True
+
+while vowels and consonants and still_searching:
+    curr_vow, curr_cons = vowels.popleft(), consonants.pop()
+    for idx in range(len(searched)):
+        if curr_vow in searched[idx]:
+            if curr_vow not in found[idx]:
+                times = searched[idx].count(curr_vow)
+                found[idx] += curr_vow * times
+                if len(found[idx]) == len(searched[idx]):
+                    still_searching = False
+                    print(f"Word found: {searched[idx]}")
+                    break
+
+        if curr_cons in searched[idx]:
+            if curr_cons not in found[idx]:
+                times = searched[idx].count(curr_cons)
+                found[idx] += curr_cons * times
+                if len(found[idx]) == len(searched[idx]):
+                    still_searching = False
+                    print(f"Word found: {searched[idx]}")
+                    break
+if still_searching:
+    print("Cannot find any word!")
+if vowels:
+    print(f"Vowels left:", ' '.join(vowels))
+if consonants:
+    print(f"Consonants left:", *consonants, sep=" ")
