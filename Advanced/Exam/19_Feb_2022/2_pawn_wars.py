@@ -35,3 +35,66 @@
 # •	There will be no case where two pawns are placed on the same square.
 # •	There will be no case where two pawns are placed on the same column.
 # •	There will be no case where black/white will be placed on the last rank.
+
+size = 8
+
+matrix = []
+
+white_r = 0
+white_c = 0
+black_r = 0
+black_c = 0
+
+for i in range(size):
+    board = input().split()
+    letter = 96
+    for i_ in range(size):
+        letter += 1
+        digit = 8 - i
+        if board[i_] == "w":
+            white_r = i
+            white_c = i_
+        elif board[i_] == "b":
+            black_r = i
+            black_c = i_
+
+        board[i_] = chr(letter) + str(digit)
+    matrix.append(board)
+
+white_position = [white_r, white_c]
+black_position = [black_r, black_c]
+while True:
+    if white_position[0] - 1  < 0:
+        print(f"Game over! White pawn is promoted to a queen at {matrix[white_position[0]][white_position[1]]}.")
+        break
+    diagonal_left = white_position.copy()
+    diagonal_left[0] -= 1
+    diagonal_left[1] -= 1
+    if diagonal_left == black_position:
+        print(f"Game over! White win, capture on {matrix[black_position[0]][black_position[1]]}.")
+        break
+    diagonal_right = white_position.copy()
+    diagonal_right[0] -= 1
+    diagonal_right[1] += 1
+    if diagonal_right == black_position:
+        print(f"Game over! White win, capture on {matrix[black_position[0]][black_position[1]]}.")
+        break
+    white_position[0] -= 1
+
+    if black_position[0] + 1 == size:
+        print(f"Game over! Black pawn is promoted to a queen at {matrix[black_position[0]][black_position[1]]}.")
+        break
+    diagonal_left_ = black_position.copy()
+    diagonal_left_[0] += 1
+    diagonal_left_[1] -= 1
+    if diagonal_left_ == white_position:
+        print(f"Game over! Black win, capture on {matrix[white_position[0]][white_position[1]]}.")
+        break
+    diagonal_right_ = black_position.copy()
+    diagonal_right[0] += 1
+    diagonal_right[1] += 1
+    if diagonal_right == white_position:
+        print(f"Game over! Black win, capture on {matrix[white_position[0]][white_position[1]]}.")
+        break
+    black_position[0] += 1
+
