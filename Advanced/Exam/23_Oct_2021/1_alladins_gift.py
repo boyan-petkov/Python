@@ -42,3 +42,80 @@
 # Constraints
 # •	All the materials values will be integers in the range [1, 1000]
 # •	Magic level values will be integers in the range [1, 1000]
+
+
+from collections import deque
+
+
+def requirements_true(current_result,):
+    for key_, requirements_ in gifts.items():
+        if requirements_[0] <= current_result <= requirements_[1]:
+            finished[key_] += 1
+            return True
+    return False
+
+
+gifts = {
+    "Gemstone": [100, 199],
+    "Porcelain Sculpture": [200, 299],
+    "Gold": [300, 399],
+    "Diamond Jewellery": [400, 499]
+}
+
+finished = {}
+for name in gifts.keys():
+    finished[name] = 0
+
+materials = [int(x) for x in input().split()]
+magic_levels = deque([int(x) for x in input().split()])
+
+successful = False
+
+while materials and magic_levels:
+    material, level, = materials.pop(), magic_levels.popleft()
+    result = material + level
+    if result > 499:
+        result /= 2
+        if requirements_true(result):
+            continue
+
+    if requirements_true(result):
+        continue
+
+
+    if result < 100 and result % 2 == 0:
+        result = material * 2 + level * 3
+        if requirements_true(result):
+            continue
+    elif result < 100 and result % 2 != 0:
+        result *= 2
+        if requirements_true(result):
+            continue
+
+
+pair1 = False
+pair2 = False
+
+if finished["Gemstone"] > 0 and finished["Porcelain Sculpture"] > 0:
+    pair1 = True
+if finished["Gold"] > 0 and finished["Diamond Jewellery"] > 0:
+    pair2 = True
+
+if pair1 or pair2:
+    print("The wedding presents are made!")
+else:
+    print("Aladdin does not have enough wedding presents.")
+
+if materials:
+    print("Materials left:",", ".join(str(x) for x in materials))
+if magic_levels:
+    print("Magic left:", ", ".join(str(x) for x in magic_levels))
+
+end_result = {}
+for gift_name, times in finished.items():
+    if times > 0:
+        end_result[gift_name] = times
+
+end_result = dict(sorted(end_result.items(), key = lambda kvp: kvp[0]))
+for kvp in end_result.items():
+    print(f"{kvp[0]}: {kvp[1]}")
