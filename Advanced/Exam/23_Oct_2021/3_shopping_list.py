@@ -19,3 +19,37 @@
 # Output
 # •	The function should return strings on separate lines containing the bought products and their price in the format described above.
 # •	The total price should be formatted to the second decimal point.
+
+def shopping_list(budget: int, **kwargs):
+    start_shopping = False
+    basket = 0
+    products = 0
+    print_list = []
+    if budget < 100 and start_shopping is False:
+        return "You do not have enough budget."
+
+    start_shopping = True
+
+    for product, price_quantity in kwargs.items():
+        price, quantity = float(price_quantity[0]), int(price_quantity[1])
+        sum_current_product = price * quantity
+        if sum_current_product <= budget:
+            budget -= sum_current_product
+            print_list.append(f"You bought {product} for {sum_current_product:.2f} leva.")
+            basket += 1
+            products += 1
+            if basket == 5 or products == len(kwargs):
+                break
+    return '\n'.join(print_list)
+
+print(shopping_list(104,
+                    cola=(1.20, 2),
+                    candies=(0.25, 15),
+                    bread=(1.80, 1),
+                    pie=(10.50, 5),
+                    tomatoes=(4.20, 1),
+                    milk=(2.50, 2),
+                    juice=(2, 3),
+                    eggs=(3, 1),
+                    ))
+
