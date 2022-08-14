@@ -4,3 +4,21 @@
 # •	status() which will return the amount of free space left in the cup. 
 # Submit only the class in the judge system. Do not forget to test your code.
 
+class Cup:
+    def __init__(self, size, quantity):
+        self.size = size
+        self.quantity = quantity
+        # self.currently_available = size - quantity
+
+    def fill(self, amount):
+        if self.status() >= amount:
+            self.quantity += amount
+
+    def status(self):
+        return self.size - self.quantity
+
+cup = Cup(100, 50)
+print(cup.status())
+cup.fill(40)
+cup.fill(20)
+print(cup.status())
