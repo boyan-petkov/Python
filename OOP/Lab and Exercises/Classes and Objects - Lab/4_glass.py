@@ -6,4 +6,26 @@
 # -	fill(ml) - fill the glass with the given milliliters if there is enough space in it and return "Glass filled with {ml} ml", otherwise return "Cannot add {ml} ml"
 # -	empty() - empty the glass and return "Glass is now empty" 
 # -	info() - returns info about the glass in the format "{space_left} ml left"
+class Glass:
+    capacity = 250
+    def __init__(self):
+        self.content = 0
 
+    def fill(self, ml):
+        if self.content + ml <= Glass.capacity:
+            self.content += ml
+            return f"Glass filled with {ml} ml"
+        return f"Cannot add {ml} ml"
+
+    def empty(self):
+        self.content = 0
+        return f"Glass is now empty"
+
+    def info(self):
+        return f"{Glass.capacity - self.content} ml left"
+glass = Glass()
+print(glass.fill(100))
+print(glass.fill(200))
+print(glass.empty())
+print(glass.fill(200))
+print(glass.info())
