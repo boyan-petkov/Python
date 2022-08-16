@@ -6,6 +6,8 @@
 # o	If there is enough memory, but the phone is off, return "Turn on your phone to install {app}"
 # o	Otherwise return "Not enough memory to install {app}"
 # -	status() - returns "Total apps: {total_apps_count}. Memory left: {memory_left}"
+
+
 class Smartphone:
     def __init__(self, memory):
         self.memory = memory
@@ -35,3 +37,4 @@ print(smartphone.install("Facebook", 60))
 print(smartphone.install("Messenger", 20))
 print(smartphone.install("Instagram", 40))
 print(smartphone.status())
+
