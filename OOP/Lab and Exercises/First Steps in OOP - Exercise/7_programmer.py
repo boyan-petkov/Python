@@ -11,6 +11,7 @@
 # o	In the last case the programmer does not have the skills, so return "{name} needs {needed_skills} more skills" and do not change his language
 # Submit only the class in the judge system.
 
+
 class Programmer:
     def __init__(self, name, language, skills):
         self.name = name
