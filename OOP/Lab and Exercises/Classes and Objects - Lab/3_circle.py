@@ -4,6 +4,8 @@
 # -	set_radius(new_radius) - changes the radius
 # -	get_area() - returns the area of the circle
 # -	get_circumference() - returns the circumference of the circle
+
+
 class Circle:
     pi = 3.14
 
@@ -22,6 +24,8 @@ class Circle:
     def __str__(self):
         return f"Current radius: {self.radius}, current area: {Circle.get_area(self)}, " \
                f"circumference:{Circle.get_circumference(self)}"
+    
+    
 circle = Circle(10)
 print(circle)
 circle.set_radius(12)
