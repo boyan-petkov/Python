@@ -2,6 +2,8 @@
 # -	set_x(new_x) - changes the x value of the point
 # -	set_y(new_y) - changes the y value of the point
 # -	__str__ - returns the coordinates of the point in the format "The point has coordinates ({x},{y}) "
+
+
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -21,3 +23,4 @@ print(p)
 p.set_x(3)
 p.set_y(5)
 print(p)
+
