@@ -5,7 +5,8 @@ The class should receive name: str, and quantity: int upon initialization. It sh
 •	decrease(quantity: int) - decreases the quantity of the product only if there is enough
 •	increase(quantity: int) - increases the quantity of the product
 •	__repr__() - override the method, so it returns the name of the product 
-In the file drink.py, the class Drink should be implemented. The class should inherit from the Product class. An instance of the Drink class will have a name and a quantity of 10.
+In the file drink.py, the class Drink should be implemented. The class should inherit from the Product class.
+An instance of the Drink class will have a name and a quantity of 10.
 In the food.py file, the Food class should be implemented. The class should inherit from the Product class. An instance of the Food class will have a name 
 and a quantity of 15.
 In the product_repository.py file, the class ProductRepository should be implemented. It is a repository for all products that are delivered to the grocery shop.
