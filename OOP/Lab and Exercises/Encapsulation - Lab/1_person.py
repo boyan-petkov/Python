@@ -19,3 +19,4 @@ print(person.get_name())
 print(person.get_age())
 person.__name = "Boyan"
 print(person.get_name())
+
