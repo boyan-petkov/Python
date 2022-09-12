@@ -1,3 +1,10 @@
+# Create a class called Integer. Upon initialization, it should receive a single parameter value (int). It should have 3 additional methods:
+# •	from_float(float_value) - creates a new instance by flooring the provided floating number. If the value is not a float, return a message "value is not a float"
+# •	from_roman(value) - creates a new instance by converting the roman number (as string) to an integer
+# •	from_string(value) - creates a new instance by converting the string to an integer (if the value cannot be converted, return a message "wrong type")
+
+
+
 class Integer:
     def __init__(self, value):
         self.value = value
