@@ -1,19 +1,19 @@
 
-Having the following code:
+# Having the following code:
 
-def even_numbers(function):
+# def even_numbers(function):
 
-    def wrapper(numbers):
+#     def wrapper(numbers):
 
-        # TODO: Implement
+#         # TODO: Implement
 
-    return wrapper
+#     return wrapper
 
-Complete the code so it works as expected
+# Complete the code so it works as expected
  
-Input                                                 Output
-@even_numbers                                          [2, 4]
-def get_numbers(numbers):
-    return numbers
-print(get_numbers([1, 2, 3, 4, 5]))      
+# Input                                                 Output
+# @even_numbers                                          [2, 4]
+# def get_numbers(numbers):
+#     return numbers
+# print(get_numbers([1, 2, 3, 4, 5]))      
 
