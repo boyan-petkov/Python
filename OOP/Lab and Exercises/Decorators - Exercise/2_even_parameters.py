@@ -1,7 +1,8 @@
-
 # Create a decorator function called even_parameters. 
 # It should check if all parameters passed to a function are even numbers and only then execute the function and return the result. 
 # Otherwise, don't execute the function and return "Please use only even numbers!"
+
+
 def even_parameters(func):
     def wrapper(*args):
         if any(arg % 2 != 0 if type(arg) == int else True for arg in args):
