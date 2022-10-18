@@ -90,3 +90,74 @@
 # •	There is no limit on the tests you can write but keep your attention on the main functionality
 # Note: You are not allowed to change the structure of the provided code
 
+from unittest import TestCase, main
+
+class CarTesting(TestCase):
+    def test_if_initialized_correctly(self):
+        car = Car("bmw", "f11", 15, 60)
+        self.assertEqual("bmw", car.make)
+        self.assertEqual("f11", car.model)
+        self.assertEqual(15, car.fuel_consumption)
+        self.assertEqual(60, car.fuel_capacity)
+
+    def test_when_make_empy_raises(self):
+        with self.assertRaises(Exception) as error:
+            car = Car("", "f11", 15, 60)
+        self.assertEqual("Make cannot be null or empty!", str(error.exception))
+
+    def test_when_model_empy_raises(self):
+        with self.assertRaises(Exception) as error:
+            car = Car("BMW", "", 15, 60)
+        self.assertEqual("Model cannot be null or empty!", str(error.exception))
+
+    def test_when_consumption_is_zero_raises(self):
+        with self.assertRaises(Exception) as error:
+            car = Car("bmw", "f11", 0, 60)
+        self.assertEqual("Fuel consumption cannot be zero or negative!", str(error.exception))
+
+    def test_when_capacity_is_zero_raises(self):
+        with self.assertRaises(Exception) as error:
+            car = Car("bmw", "f11", 15, 0)
+        self.assertEqual("Fuel capacity cannot be zero or negative!", str(error.exception))
+
+    def test_when_fuel_amount_is_zero_raises(self):
+        car = Car("bmw", "f11", 15, 60)
+        with self.assertRaises(Exception) as error:
+            car.fuel_amount = -1
+        self.assertEqual("Fuel amount cannot be negative!", str(error.exception))
+
+    def test_if_refuel_method_raises(self):
+        car = Car("bmw", "f11", 15, 60)
+        with self.assertRaises(Exception) as error:
+            car.refuel(-1)
+        self.assertEqual("Fuel amount cannot be zero or negative!", str(error.exception))
+
+    def test_refuel_normal_behavior(self):
+        car = Car("bmw", "f11", 15, 60)
+        car.refuel(30)
+        self.assertEqual(30, car.fuel_amount)
+        car.refuel(10)
+        self.assertEqual(40, car.fuel_amount)
+
+    def test_refuel_when_overfilled(self):
+        car = Car("bmw", "f11", 15, 60)
+        car.refuel(65)
+        self.assertEqual(60, car.fuel_amount)
+
+    def test_if_drive_method_raises(self):
+        car = Car("bmw", "f11", 15, 60)
+        with self.assertRaises(Exception) as error:
+            car.drive(1000)
+        self.assertEqual("You don't have enough fuel to drive!", str(error.exception))
+
+    def test_drive_method_behavior(self):
+        car = Car("bmw", "f11", 15, 60)
+        car.fuel_amount = 50
+        car.drive(200)
+
+        self.assertEqual(20, car.fuel_amount )
+
+if __name__ == "__main__":
+    main()
+
+
