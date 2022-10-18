@@ -62,3 +62,80 @@
 # •	get_index
 # Hint
 # Do not forget to test the constructor
+
+
+
+from unittest import TestCase, main
+
+
+class TestList(TestCase):
+    # def test_if_initialized_correctly(self):
+    #     test_list = IntegerList(1, 2, 3, "a")
+    #     self.assertEqual(3, len(test_list.get_data()))
+
+    def test_get_data_method(self):
+        test_list = IntegerList(1, 2, 3, "a")
+        expected, actual = [1, 2, 3], test_list.get_data()
+        self.assertEqual(expected, actual)
+
+    def test_if_add_method_raises(self):
+        test_list = IntegerList(1, 2, 3)
+        with self.assertRaises(ValueError) as error:
+            test_list.add("a")
+        self.assertEqual("Element is not Integer", str(error.exception))
+
+    def test_if_add_method_adds_elements(self):
+        test_list = IntegerList(1, 2, 3)
+        test_list.add(4)
+        self.assertTrue(4 in test_list.get_data())
+        # self.assertEqual(4, len(test_list.get_data()))
+
+    def test_remove_index_method_raises(self):
+        test_list = IntegerList(1, 2, 3)
+        with self.assertRaises(IndexError) as error:
+            test_list.remove_index(3)
+        self.assertEqual("Index is out of range", str(error.exception))
+
+    def test_if_remove_method_really_removes(self):
+        test_list = IntegerList(1, 2, 3)
+        test_list.remove_index(0)
+        self.assertEqual(2, len(test_list.get_data()))
+
+    def test_get_method_raises(self):
+        test_list = IntegerList(1, 2, 3)
+        with self.assertRaises(IndexError) as error:
+            test_list.get(5)
+        self.assertEqual("Index is out of range", str(error.exception))
+
+    def test_get_method_behavior(self):
+        test_list = IntegerList(1, 2, 3)
+        self.assertEqual(2, test_list.get(1))
+
+    def test_insert_method_index_error_raises(self):
+        test_list = IntegerList(1, 2, 3)
+        with self.assertRaises(IndexError) as error:
+            test_list.insert(5, 5)
+        self.assertEqual("Index is out of range", str(error.exception))
+
+    def test_insert_method_value_error_raises(self):
+        test_list = IntegerList(1, 2, 3)
+        with self.assertRaises(ValueError) as error:
+            test_list.insert(1, "a")
+        self.assertEqual("Element is not Integer", str(error.exception))
+
+    def test_insert_method_behavior(self):
+        test_list = IntegerList(1, 2, 3)
+        test_list.insert(0, 10)
+        self.assertEqual([10, 1, 2, 3], test_list.get_data())
+
+    def test_get_biggest_method_behavior(self):
+        test_list = IntegerList(1, 2, 3)
+        self.assertEqual(3, test_list.get_biggest())
+
+    def test_get_index_method(self):
+        test_list = IntegerList(1, 2, 3)
+        temp = test_list.get_index(3)
+        self.assertEqual(2, temp)
+
+if __name__ == "__main__":
+    main()
